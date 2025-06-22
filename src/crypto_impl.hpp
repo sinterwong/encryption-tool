@@ -6,7 +6,7 @@
 #include <cryptopp/modes.h>
 #include <memory>
 
-namespace infer::encrypt::detail {
+namespace encrypt::detail {
 
 class CryptoImpl {
 public:
@@ -18,10 +18,8 @@ public:
                    std::vector<uint8_t> &output);
   bool decryptData(const std::vector<uint8_t> &input,
                    std::vector<uint8_t> &output);
-  bool encryptData(const std::string &inputPath,
-                   std::vector<uint8_t> &output);
-  bool decryptData(const std::string &inputPath,
-                   std::vector<uint8_t> &output);
+  bool encryptData(const std::string &inputPath, std::vector<uint8_t> &output);
+  bool decryptData(const std::string &inputPath, std::vector<uint8_t> &output);
   bool compress(const std::string &input, std::string &output);
   bool decompress(const std::string &input, std::string &output);
 
@@ -33,5 +31,5 @@ private:
   void initializeCipher();
 };
 
-} // namespace infer::encrypt::detail
+} // namespace encrypt::detail
 #endif

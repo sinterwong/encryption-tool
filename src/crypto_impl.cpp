@@ -5,7 +5,7 @@
 #include <cryptopp/zdeflate.h>
 #include <cryptopp/zinflate.h>
 
-namespace infer::encrypt::detail {
+namespace encrypt::detail {
 
 CryptoImpl::CryptoImpl(const CryptoConfig &config) : config_(config) {
   initializeCipher();
@@ -135,4 +135,4 @@ bool CryptoImpl::decompress(const std::string &input, std::string &output) {
     return false;
   }
 }
-} // namespace infer::encrypt::detail
+} // namespace encrypt::detail

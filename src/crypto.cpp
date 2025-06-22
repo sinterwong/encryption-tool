@@ -8,7 +8,7 @@
 #include <cryptopp/zdeflate.h>
 #include <cryptopp/zinflate.h>
 
-namespace infer::encrypt {
+namespace encrypt {
 
 Crypto::Crypto(const CryptoConfig &config)
     : impl_(std::make_unique<detail::CryptoImpl>(config)) {}
@@ -130,4 +130,4 @@ CryptoConfig Crypto::deriveKeyFromCommit(const std::string &commit) {
   return config;
 }
 
-} // namespace infer::encrypt
+} // namespace encrypt

@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 
-namespace infer::encrypt {
+namespace encrypt {
 
 // Forward declarations
 namespace detail {
@@ -38,11 +38,9 @@ public:
   bool decryptData(const std::vector<uint8_t> &input,
                    std::vector<uint8_t> &output);
 
-  bool encryptData(const std::string &inputPath,
-                   std::vector<uint8_t> &output);
+  bool encryptData(const std::string &inputPath, std::vector<uint8_t> &output);
 
-  bool decryptData(const std::string &inputPath,
-                   std::vector<uint8_t> &output);
+  bool decryptData(const std::string &inputPath, std::vector<uint8_t> &output);
 
   // Compression operations
   bool compress(const std::string &input, std::string &output);
@@ -67,5 +65,5 @@ public:
       : std::runtime_error(message) {}
 };
 
-} // namespace infer::encrypt
+} // namespace encrypt
 #endif

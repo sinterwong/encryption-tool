@@ -116,7 +116,7 @@ int main(int argc, char *argv[]) {
   }
 
   try {
-    infer::encrypt::CryptoConfig config;
+    encrypt::CryptoConfig config;
 
     if (FLAGS_generate_key) {
       if (!FLAGS_commit.empty() || !FLAGS_key_file.empty() ||
@@ -125,7 +125,7 @@ int main(int argc, char *argv[]) {
                   << std::endl;
         return 1;
       }
-      config = infer::encrypt::Crypto::generateSecureConfig();
+      config = encrypt::Crypto::generateSecureConfig();
 
     } else if (!FLAGS_commit.empty()) {
       if (!FLAGS_key_file.empty() || !FLAGS_iv_file.empty()) {
@@ -133,7 +133,7 @@ int main(int argc, char *argv[]) {
                   << std::endl;
         return 1;
       }
-      config = infer::encrypt::Crypto::deriveKeyFromCommit(FLAGS_commit);
+      config = encrypt::Crypto::deriveKeyFromCommit(FLAGS_commit);
 
     } else if (!FLAGS_key_file.empty() && !FLAGS_iv_file.empty()) {
       if (!readFileToString(FLAGS_key_file, config.key) ||
@@ -155,7 +155,7 @@ int main(int argc, char *argv[]) {
       writeStringToFile(FLAGS_save_iv, config.iv);
     }
 
-    infer::encrypt::Crypto crypto(config);
+    encrypt::Crypto crypto(config);
     bool success = false;
 
     if (FLAGS_mode == "encrypt") {
@@ -172,12 +172,11 @@ int main(int argc, char *argv[]) {
     std::cout << "Operation completed successfully" << std::endl;
 
     if (FLAGS_show_hash) {
-      std::string hash =
-          infer::encrypt::Crypto::calculateFileHash(FLAGS_output);
+      std::string hash = encrypt::Crypto::calculateFileHash(FLAGS_output);
       std::cout << "Output file hash (SHA256): " << hash << std::endl;
     }
 
-  } catch (const infer::encrypt::CryptoException &e) {
+  } catch (const encrypt::CryptoException &e) {
     std::cerr << "Crypto error: " << e.what() << std::endl;
     return 1;
   } catch (const std::exception &e) {

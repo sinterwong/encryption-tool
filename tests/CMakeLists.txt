@@ -9,7 +9,8 @@ SET(DEPENDENCY_INCLUDES
 SET(DEPENDENCY_LIBS
     encrypt
     cryptopp::cryptopp
-    ${GTEST_LIBS}
+    GTest::gtest
+    GTest::gtest_main
 )
 
 FILE(GLOB CURRENT_DIR_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp ${CMAKE_CURRENT_SOURCE_DIR}/*.cc)
