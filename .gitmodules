@@ -1,0 +1,14 @@
+[submodule "3rdparty/cryptopp-cmake"]
+	path = 3rdparty/cryptopp-cmake
+	url = https://github.com/abdes/cryptopp-cmake.git
+  branch = master
+
+[submodule "3rdparty/googletest"]
+	path = 3rdparty/googletest
+	url = https://github.com/google/googletest.git
+  branch = main
+
+[submodule "3rdparty/gflags"]
+	path = 3rdparty/gflags
+	url = https://github.com/gflags/gflags.git
+  branch = master
