@@ -3,6 +3,11 @@
 	url = https://github.com/abdes/cryptopp-cmake.git
   branch = master
 
+[submodule "3rdparty/cryptopp"]
+	path = 3rdparty/cryptopp
+	url = https://github.com/weidai11/cryptopp.git
+  branch = master
+
 [submodule "3rdparty/googletest"]
 	path = 3rdparty/googletest
 	url = https://github.com/google/googletest.git
