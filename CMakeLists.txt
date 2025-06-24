@@ -5,8 +5,8 @@ PROJECT(EncryptionTool VERSION 1.0.0 LANGUAGES CXX)
 
 SET(CMAKE_CXX_STANDARD 20)
 
-OPTION(BUILD_TESTS "Build with tests" ON)
-OPTION(BUILD_TOOLS "Build with tools" ON)
+OPTION(BUILD_TESTS "Build with tests" OFF)
+OPTION(BUILD_TOOLS "Build with tools" OFF)
 
 MESSAGE(INFO "--------------------------------")
 MESSAGE(STATUS "Build EncryptionTool: ${AI_WORKFLOW_VERSION}")
