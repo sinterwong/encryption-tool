@@ -4,11 +4,10 @@ PROJECT(Tools)
 SET(DEPENDENCY_INCLUDES
     ${PROJECT_INCLUDE_DIR}
     ${PROJECT_INCLUDE_DIR}/encrypt
-    ${GFLAGS_INCLUDE_DIRS}
 )
 
 SET(DEPENDENCY_LIBS
-    encrypt
+    encrypt::encrypt
     cryptopp::cryptopp
     gflags::gflags
 )

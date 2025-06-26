@@ -38,12 +38,12 @@ The following libraries are included as Git submodules in the `3rdparty` directo
     **Build Options:**
     You can customize the build using the following CMake options (passed with `-D<OPTION_NAME>=<VALUE>`):
     *   `CMAKE_BUILD_TYPE`: Specifies the build type (e.g., `Debug`, `Release`, `RelWithDebInfo`). Defaults to `RelWithDebInfo`.
-    *   `BUILD_TESTS`: Set to `ON` to build unit tests (e.g., `cmake -DBUILD_TESTS=ON ..`). Defaults to `OFF`.
-    *   `BUILD_TOOLS`: Set to `ON` to build the `cryptor` command-line tool (e.g., `cmake -DBUILD_TOOLS=ON ..`). Defaults to `ON`.
+    *   `BUILD_ENCRYPTION_TOOL_TESTS`: Set to `ON` to build unit tests (e.g., `cmake -DBUILD_ENCRYPTION_TOOL_TESTS=ON ..`). Defaults to `OFF`.
+    *   `BUILD_ENCRYPTION_TOOLS`: Set to `ON` to build the `cryptor` command-line tool (e.g., `cmake -DBUILD_ENCRYPTION_TOOLS=ON ..`). Defaults to `ON`.
 
     For example, to build with tools and tests enabled:
     ```bash
-    cmake -DBUILD_TOOLS=ON -DBUILD_TESTS=ON ..
+    cmake -DBUILD_ENCRYPTION_TOOLS=ON -DBUILD_ENCRYPTION_TOOL_TESTS=ON ..
     ```
 
 3.  **Build the project:**
@@ -60,7 +60,7 @@ The following libraries are included as Git submodules in the `3rdparty` directo
 
 ## Tool Usage (`cryptor`)
 
-The `cryptor` tool allows you to encrypt and decrypt files. It is located at `build/<target_arch>/bin/tools/cryptor` if `BUILD_TOOLS` is enabled.
+The `cryptor` tool allows you to encrypt and decrypt files. It is located at `build/<target_arch>/bin/tools/cryptor` if `BUILD_ENCRYPTION_TOOLS` is enabled.
 
 **Synopsis:**
 ```bash
@@ -107,10 +107,10 @@ The `cryptor` tool allows you to encrypt and decrypt files. It is located at `bu
 Unit tests are provided to verify the functionality of the encryption library.
 
 1.  **Enable Tests During CMake Configuration:**
-    When configuring CMake, set the `BUILD_TESTS` option to `ON`:
+    When configuring CMake, set the `BUILD_ENCRYPTION_TOOL_TESTS` option to `ON`:
     ```bash
     cd build # (or create it if it doesn't exist)
-    cmake -DBUILD_TESTS=ON ..
+    cmake -DBUILD_ENCRYPTION_TOOL_TESTS=ON ..
     ```
 
 2.  **Build the Project:**
