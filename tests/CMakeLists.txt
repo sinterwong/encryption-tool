@@ -1,35 +1,31 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
-PROJECT(Tests)
+cmake_minimum_required(VERSION 3.10)
 
-SET(DEPENDENCY_INCLUDES
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/tests)
+
+set(sources
+    main.cc
+    test_encrypt.cpp
+)
+
+add_executable(encryption_tool_tests ${sources})
+
+target_include_directories(encryption_tool_tests PRIVATE
     ${PROJECT_INCLUDE_DIR}
     ${PROJECT_INCLUDE_DIR}/encrypt
 )
 
-SET(DEPENDENCY_LIBS
+target_link_libraries(encryption_tool_tests PRIVATE
     encrypt::encrypt
     cryptopp::cryptopp
     GTest::gtest
-    GTest::gtest_main 
+    GTest::gtest_main
 )
 
-FILE(GLOB CURRENT_DIR_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp ${CMAKE_CURRENT_SOURCE_DIR}/*.cc)
-
-MESSAGE(STATUS "APP SOURCES: ${CURRENT_DIR_SRCS}")
-
-FILE(MAKE_DIRECTORY ${PROJECT_OUTPUT_DIR}/bin/tests)
-SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_OUTPUT_DIR}/bin/tests)
-
-ADD_EXECUTABLE(encryption_tool_tests  ${CURRENT_DIR_SRCS})
-TARGET_INCLUDE_DIRECTORIES(encryption_tool_tests  PRIVATE ${DEPENDENCY_INCLUDES})
-TARGET_LINK_LIBRARIES(encryption_tool_tests  PRIVATE ${DEPENDENCY_LIBS})
-
-# Discover and add tests to CTest
-INCLUDE(GoogleTest)
+include(GoogleTest)
 gtest_discover_tests(encryption_tool_tests)
 
-INSTALL(TARGETS encryption_tool_tests  DESTINATION tests)
+install(TARGETS encryption_tool_tests DESTINATION tests)
 
-IF(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/data")
-    INSTALL(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/data" DESTINATION .)
-ENDIF()
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/data")
+    install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/data" DESTINATION .)
+endif()

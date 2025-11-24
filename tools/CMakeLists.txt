@@ -1,30 +1,22 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
-PROJECT(Tools)
+cmake_minimum_required(VERSION 3.10)
 
-SET(DEPENDENCY_INCLUDES
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/tools)
+
+set(sources
+    cryptor.cc
+)
+
+add_executable(cryptor ${sources})
+
+target_include_directories(cryptor PRIVATE
     ${PROJECT_INCLUDE_DIR}
     ${PROJECT_INCLUDE_DIR}/encrypt
 )
 
-SET(DEPENDENCY_LIBS
+target_link_libraries(cryptor PRIVATE
     encrypt::encrypt
     cryptopp::cryptopp
     gflags::gflags
 )
 
-FILE(GLOB CURRENT_DIR_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp ${CMAKE_CURRENT_SOURCE_DIR}/*.cc)
-
-MESSAGE(STATUS "APP SOURCES: ${CURRENT_DIR_SRCS}")
-
-FILE(MAKE_DIRECTORY ${PROJECT_OUTPUT_DIR}/bin/tools)
-SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_OUTPUT_DIR}/bin/tools)
-FILE(GLOB_RECURSE APP_SOURCES *.cc)
-MESSAGE(STATUS "APP SOURCES: ${APP_SOURCES}")
-FOREACH(sourcefile ${APP_SOURCES})
-    STRING(REGEX MATCH "[^/]+$" sourcefilewithoutpath ${sourcefile})
-    STRING(REPLACE ".cc" "" testname ${sourcefilewithoutpath})
-    ADD_EXECUTABLE( ${testname} ${sourcefile})
-    TARGET_INCLUDE_DIRECTORIES(${testname} PRIVATE ${DEPENDENCY_INCLUDES})
-    TARGET_LINK_LIBRARIES(${testname} PRIVATE ${DEPENDENCY_LIBS})
-    INSTALL(TARGETS ${testname} DESTINATION bin)
-ENDFOREACH(sourcefile ${APP_SOURCES})
+install(TARGETS cryptor DESTINATION bin)

@@ -1,7 +1,5 @@
 // crypto_cli.cpp
 #include "crypto.hpp"
-#include <cryptopp/hex.h>
-#include <cryptopp/sha.h>
 #include <fstream>
 #include <gflags/gflags.h>
 #include <iostream>
