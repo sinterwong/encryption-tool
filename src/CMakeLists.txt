@@ -20,7 +20,8 @@ set(sources
     crypto_impl.cpp
 )
 
-add_library(encrypt SHARED
+# 根据 BUILD_SHARED_LIBS 自动决定库类型
+add_library(encrypt
     ${sources}
     ${public_headers}
     ${private_headers}
@@ -35,9 +36,18 @@ target_include_directories(encrypt
         ${PROJECT_INCLUDE_DIR}
 )
 
+# 始终使用 PRIVATE 链接，避免 export set 冲突
 target_link_libraries(encrypt PRIVATE
     cryptopp::cryptopp
 )
+
+# 检测库类型
+get_target_property(encrypt_type encrypt TYPE)
+if(encrypt_type STREQUAL "STATIC_LIBRARY")
+    set(ENCRYPT_IS_STATIC TRUE)
+else()
+    set(ENCRYPT_IS_STATIC FALSE)
+endif()
 
 install(TARGETS encrypt
     EXPORT encrypt_export_set
@@ -57,10 +67,8 @@ write_basic_package_version_file(
     COMPATIBILITY AnyNewerVersion
 )
 
-export(EXPORT encrypt_export_set
-    FILE "${CMAKE_CURRENT_BINARY_DIR}/encrypt-targets.cmake"
-    NAMESPACE encrypt::
-)
+# 不再导出到 build tree（避免依赖检查问题）
+# export(EXPORT encrypt_export_set ...)
 
 configure_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/cmake/encrypt-config.cmake.in"
@@ -75,6 +83,7 @@ install(FILES
     COMPONENT dev
 )
 
+# install 时的 export
 install(EXPORT encrypt_export_set
     FILE encrypt-targets.cmake
     NAMESPACE encrypt::
